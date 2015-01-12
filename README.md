@@ -18,7 +18,7 @@ bower install --save fetchres
 
 ## Usage (node)
 
-```
+```js
 var fetchres = require('fetchres');
 
 fetch('https://mattandre.ws/my-json-endpoint')
