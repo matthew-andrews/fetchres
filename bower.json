@@ -1,0 +1,7 @@
+{
+  "name": "fetchres",
+  "main": "index.js",
+  "devDependencies": {
+    "fetch": "~0.4.0"
+  }
+}
