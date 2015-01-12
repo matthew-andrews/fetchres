@@ -1,5 +1,4 @@
 language: node_js
-script: make test
 before_deploy:
 - npm-prepublish --verbose
 deploy:
