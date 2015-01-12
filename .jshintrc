@@ -1,0 +1,5 @@
+{
+  "node": true,
+  "predef": ["fetch", "describe", "it", "before"],
+  "esnext": true
+}
