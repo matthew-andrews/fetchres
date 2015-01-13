@@ -6,6 +6,7 @@
     "clean": "git clean -fxd",
     "files": "find . -name '*.js' ! -path './node_modules/*' ! -path './bower_components/*' ! -path './dist/*'",
     "build": "mkdir -p dist && browserify index.js -t 6to5ify --outfile dist/index.js  --standalone fetchres",
+    "prepublish": "npm run build",
     "test": "jshint `npm run -s files` && lintspaces -i js-comments -e .editorconfig `npm run -s files` && npm run build && mocha"
   },
   "devDependencies": {
