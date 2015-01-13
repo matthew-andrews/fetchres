@@ -32,6 +32,9 @@ fetch('https://mattandre.ws/my-json-endpoint')
 		if (err instanceof fetchres.BadServerResponseError) {
 			// just a network issue
 			console.error(err);
+		} else if (err instanceof fetchres.InvalidJsonError) {
+			// malformed json, probably
+			console.error('malformed json returned');
 		} else {
 			// something more serious could be wrong.
 			// probably want to investigate / send to
