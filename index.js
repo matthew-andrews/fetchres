@@ -19,6 +19,8 @@ export function text(response) {
 }
 
 export class BadServerResponseError extends Error {
+	// es6 smells
+	// https://twitter.com/andrewsmatt/status/554792707139584001
 	constructor(options) {
 		this.message = options;
 	}
