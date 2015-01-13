@@ -18,7 +18,7 @@ describe('fetch', function() {
 			.reply(200, good);
 		nock('https://mattandre.ws')
 			.get('/fail.txt')
-			.reply(404, bad);
+			.reply(410, bad);
 		nock('https://mattandre.ws')
 			.get('/succeed.json')
 			.reply(200, { text: good });
@@ -27,39 +27,37 @@ describe('fetch', function() {
 			.reply(404, { text: bad });
 	});
 
-	it('should facilitate the making of requests', function(done) {
-		fetch('https://mattandre.ws/succeed.txt')
+	it('should facilitate the making of requests', function() {
+		return fetch('https://mattandre.ws/succeed.txt')
 			.then(fetchRes.text)
 			.then(function(data) {
 				expect(data).to.equal(good);
-				done();
 			});
 	});
 
-	it('should do the right thing with bad requests', function(done) {
-		fetch('https://mattandre.ws/fail.txt')
+	it('should do the right thing with bad requests', function() {
+		return fetch('https://mattandre.ws/fail.txt')
 			.then(fetchRes.text)
 			.catch(function(err) {
-				expect(err).to.be.instanceOf(fetchRes.BadServerResponse);
-				done();
+				expect(err instanceof fetchRes.BadServerResponseError);
+				expect(err.message).to.equal(410);
 			});
 	});
 
-	it('should facilitate the making of json requests', function(done) {
-		fetch('https://mattandre.ws/succeed.json')
+	it('should facilitate the making of json requests', function() {
+		return fetch('https://mattandre.ws/succeed.json')
 			.then(fetchRes.json)
 			.then(function(data) {
 				expect(data.text).to.equal(good);
-				done();
 			});
 	});
 
-	it('should do the right thing with bad json requests', function(done) {
-		fetch('https://mattandre.ws/fail.json')
+	it('should do the right thing with bad json requests', function() {
+		return fetch('https://mattandre.ws/fail.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
-				expect(err).to.be.instanceOf(fetchRes.BadServerResponse);
-				done();
+				expect(err instanceof fetchRes.BadServerResponseError);
+				expect(err.message).to.equal(404);
 			});
 	});
 

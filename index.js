@@ -2,20 +2,20 @@
 
 export function json(response) {
 	if (response.status >= 400) {
-		throw new BadServerResponse(response.status);
+		throw new BadServerResponseError(response.status);
 	}
 	return response.json();
 }
 
 export function text(response) {
 	if (response.status >= 400) {
-		throw new BadServerResponse(response.status);
+		throw new BadServerResponseError(response.status);
 	}
 	return response.text();
 }
 
-export function BadServerResponse(message) {
-	this.message = (message || "");
+export class BadServerResponseError extends Error {
+	constructor(options) {
+		this.message = options;
+	}
 }
-
-BadServerResponse.prototype = Error.prototype;
