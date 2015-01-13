@@ -11,7 +11,6 @@
     "test": "jshint `npm run -s files` && lintspaces -i js-comments -e .editorconfig `npm run -s files` && npm run build && mocha"
   },
   "devDependencies": {
-    "6to5": "^2.11.1",
     "6to5ify": "^3.1.2",
     "browserify": "^8.1.0",
     "chai": "^1.10.0",
