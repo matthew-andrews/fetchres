@@ -25,6 +25,9 @@ describe('fetch', function() {
 		nock('https://mattandre.ws')
 			.get('/fail.json')
 			.reply(404, { text: bad });
+		nock('https://mattandre.ws')
+			.get('/invalid.json')
+			.reply(200, 'that\'s no json');
 	});
 
 	it('should facilitate the making of requests', function() {
@@ -39,7 +42,7 @@ describe('fetch', function() {
 		return fetch('https://mattandre.ws/fail.txt')
 			.then(fetchRes.text)
 			.catch(function(err) {
-				expect(err instanceof fetchRes.BadServerResponseError);
+				expect(err).to.be.instanceof(fetchRes.BadServerResponseError);
 				expect(err.message).to.equal(410);
 			});
 	});
@@ -56,8 +59,16 @@ describe('fetch', function() {
 		return fetch('https://mattandre.ws/fail.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
-				expect(err instanceof fetchRes.BadServerResponseError);
+				expect(err).to.be.instanceof(fetchRes.BadServerResponseError);
 				expect(err.message).to.equal(404);
+			});
+	});
+
+	it('should do the right thing with invalid json responses', function() {
+		return fetch('https://mattandre.ws/invalid.json')
+			.then(fetchRes.json)
+			.catch(function(err) {
+				expect(err).to.be.instanceof(fetchRes.InvalidJsonError);
 			});
 	});
 
