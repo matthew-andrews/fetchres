@@ -1,6 +1,6 @@
 {
   "name": "fetchres",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "dist/index.js",
   "scripts": {
     "clean": "git clean -fxd",
