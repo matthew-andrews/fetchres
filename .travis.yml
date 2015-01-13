@@ -6,6 +6,7 @@ deploy:
   email: matt@mattandre.ws
   api_key:
     secure: HbmI6tUivQhOKxfp6LfFxw7I0sJb06cnqR7RJAUUKhH4SeqxejkEHVzxFWM8Lgx9G+rANDTaVHuVgLQ7MtL3J642LAEMiDxE5gfG9+6YuoVrCSz9tTRQinTQmlFIiE4aDieH96a/PrpnFzDFecezCggg8zHayKi+i310kll1k7k=
+  skip_cleanup: true
   on:
     all_branches: true
     tags: true
