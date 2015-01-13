@@ -29,7 +29,7 @@ fetch('https://mattandre.ws/my-json-endpoint')
 		console.log(data);
 	})
 	.catch(function(err) {
-		if (err instanceof fetchres.BadServerResponse) {
+		if (err instanceof fetchres.BadServerResponseError) {
 			// just a network issue
 			console.error(err);
 		} else {
