@@ -3,7 +3,7 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 require("6to5/register");
-var fetchRes = require('../dist/index');
+var fetchRes = require('../lib/fetchres');
 
 var expect = require('chai').expect;
 var nock = require('nock');
