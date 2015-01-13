@@ -1,4 +1,4 @@
-# fetchres
+# fetchres [![Build Status](https://travis-ci.org/matthew-andrews/fetchres.svg?branch=ynosubclass)](https://travis-ci.org/matthew-andrews/fetchres)
 
 Some useful response handlers for using [Fetch](https://github.com/github/fetch) API in the real world.
 
