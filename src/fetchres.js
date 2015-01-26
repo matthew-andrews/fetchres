@@ -1,6 +1,9 @@
 "use strict";
 
 export function json(response) {
+	if (Array.isArray(response)) {
+		return Promise.all(response.map(json));
+	}
 	if (response.status >= 400) {
 		throw new BadServerResponseError(response.status);
 	}
@@ -12,6 +15,9 @@ export function json(response) {
 }
 
 export function text(response) {
+	if (Array.isArray(response)) {
+		return Promise.all(response.map(text));
+	}
 	if (response.status >= 400) {
 		throw new BadServerResponseError(response.status);
 	}

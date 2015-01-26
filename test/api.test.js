@@ -14,12 +14,14 @@ describe('fetch', function() {
 	before(function() {
 		nock('https://mattandre.ws')
 			.get('/succeed.txt')
+			.times(3)
 			.reply(200, good);
 		nock('https://mattandre.ws')
 			.get('/fail.txt')
 			.reply(410, bad);
 		nock('https://mattandre.ws')
 			.get('/succeed.json')
+			.times(3)
 			.reply(200, { text: good });
 		nock('https://mattandre.ws')
 			.get('/fail.json')
@@ -36,7 +38,7 @@ describe('fetch', function() {
 				expect(data).to.equal(good);
 			});
 	});
-
+	
 	it('should do the right thing with bad requests', function() {
 		return fetch('https://mattandre.ws/fail.txt')
 			.then(fetchRes.text)
@@ -45,7 +47,7 @@ describe('fetch', function() {
 				expect(err.message).to.equal(410);
 			});
 	});
-
+	
 	it('should facilitate the making of json requests', function() {
 		return fetch('https://mattandre.ws/succeed.json')
 			.then(fetchRes.json)
@@ -53,7 +55,7 @@ describe('fetch', function() {
 				expect(data.text).to.equal(good);
 			});
 	});
-
+	
 	it('should do the right thing with bad json requests', function() {
 		return fetch('https://mattandre.ws/fail.json')
 			.then(fetchRes.json)
@@ -62,12 +64,36 @@ describe('fetch', function() {
 				expect(err.message).to.equal(404);
 			});
 	});
-
+	
 	it('should do the right thing with invalid json responses', function() {
 		return fetch('https://mattandre.ws/invalid.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
 				expect(err).to.be.instanceof(fetchRes.InvalidJsonError);
+			});
+	});
+	
+	it('should facilitate the making of many json requests', function() {
+		return Promise.all([
+				fetch('https://mattandre.ws/succeed.json'),
+				fetch('https://mattandre.ws/succeed.json')
+			])
+			.then(fetchRes.json)
+			.then(function(data) {
+				expect(data[0].text).to.equal(good);
+				expect(data[1].text).to.equal(good);
+			});
+	});
+
+	it('should facilitate the making of many txt requests', function() {
+		return Promise.all([
+				fetch('https://mattandre.ws/succeed.txt'),
+				fetch('https://mattandre.ws/succeed.txt')
+			])
+			.then(fetchRes.text)
+			.then(function(data) {
+				expect(data[0]).to.equal(good);
+				expect(data[1]).to.equal(good);
 			});
 	});
 
