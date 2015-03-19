@@ -4,7 +4,7 @@ export function json(response) {
 	if (Array.isArray(response)) {
 		return Promise.all(response.map(json));
 	}
-	if (response.status >= 400) {
+	if (!response.ok) {
 		throw new BadServerResponseError(response.status);
 	}
 	return response.json()
@@ -18,7 +18,7 @@ export function text(response) {
 	if (Array.isArray(response)) {
 		return Promise.all(response.map(text));
 	}
-	if (response.status >= 400) {
+	if (!response.ok) {
 		throw new BadServerResponseError(response.status);
 	}
 	return response.text();
