@@ -15,7 +15,7 @@
     "browserify": "^8.1.0",
     "chai": "^1.10.0",
     "es6-promise": "^2.0.1",
-    "isomorphic-fetch": "^1.1.0",
+    "isomorphic-fetch": "^2.0.0",
     "jshint": "^2.5.11",
     "lintspaces-cli": "0.0.4",
     "mocha": "^2.1.0",
