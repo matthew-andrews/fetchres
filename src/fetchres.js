@@ -9,6 +9,9 @@ export function json(response) {
 	}
 	return response.json()
 		.catch(function(err) {
+			if (err.message.indexOf('response timeout at') === 0) {
+				throw new ReadTimeoutError(err.message);
+			}
 			// probably invalid json
 			throw new InvalidJsonError(err.message);
 		});
@@ -33,6 +36,12 @@ export class BadServerResponseError extends Error {
 }
 
 export class InvalidJsonError extends Error {
+	constructor(options) {
+		this.message = options;
+	}
+}
+
+export class ReadTimeoutError extends Error {
 	constructor(options) {
 		this.message = options;
 	}
