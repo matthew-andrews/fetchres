@@ -4,7 +4,10 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 var fetchRes = require('../lib/fetchres');
 
-var expect = require('chai').expect;
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+var expect = chai.expect;
 var nock = require('nock');
 var good = 'hello world. 你好世界。';
 var bad = 'good bye cruel world. 再见残酷的世界。';
@@ -101,14 +104,10 @@ describe('fetch', function() {
 		var response = {
 			ok: true,
 			json: function() {
-				return Promise.reject(new Error('response timeout at ...'));
+				return Promise.reject(new Error('response timeout at...'));
 			}
 		};
-		return fetchRes.json(response)
-			.catch(function(err) {
-				expect(err).to.be.an.instanceof(fetchRes.ReadTimeoutError);
-				expect(err.message).to.equal('response timeout at ...');
-			});
+		return expect(fetchRes.json(response)).to.be.rejectedWith(fetchRes.ReadTimeoutError, 'response timeout at...');
 	});
 
 });
