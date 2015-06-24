@@ -29,10 +29,10 @@ fetch('https://mattandre.ws/my-json-endpoint')
 		console.log(data);
 	})
 	.catch(function(err) {
-		if (err instanceof fetchres.BadServerResponseError) {
+		if (err.name === fetchres.BadServerResponseError.name) {
 			// just a dodgy response
 			console.error(err);
-		} else if (err instanceof fetchres.InvalidJsonError) {
+		} else if (err.name === fetchres.InvalidJsonError.name) {
 			// malformed json, probably
 			console.error('malformed json returned');
 		} else {
