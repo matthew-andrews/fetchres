@@ -32,17 +32,20 @@ export class BadServerResponseError extends Error {
 	// https://twitter.com/andrewsmatt/status/554792707139584001
 	constructor(options) {
 		this.message = options;
+		this.name = 'BadServerResponseError';
 	}
 }
 
 export class InvalidJsonError extends Error {
 	constructor(options) {
 		this.message = options;
+		this.name = 'InvalidJsonError';
 	}
 }
 
 export class ReadTimeoutError extends Error {
 	constructor(options) {
 		this.message = options;
+		this.name = 'ReadTimeoutError';
 	}
 }

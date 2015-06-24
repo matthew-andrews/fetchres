@@ -46,7 +46,7 @@ describe('fetch', function() {
 		return fetch('https://mattandre.ws/fail.txt')
 			.then(fetchRes.text)
 			.catch(function(err) {
-				expect(err).to.be.instanceof(fetchRes.BadServerResponseError);
+				expect(err.name).to.equal(fetchRes.BadServerResponseError.name);
 				expect(err.message).to.equal(410);
 			});
 	});
@@ -63,7 +63,7 @@ describe('fetch', function() {
 		return fetch('https://mattandre.ws/fail.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
-				expect(err).to.be.instanceof(fetchRes.BadServerResponseError);
+				expect(err.name).to.equal(fetchRes.BadServerResponseError.name);
 				expect(err.message).to.equal(404);
 			});
 	});
@@ -72,7 +72,7 @@ describe('fetch', function() {
 		return fetch('https://mattandre.ws/invalid.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
-				expect(err).to.be.instanceof(fetchRes.InvalidJsonError);
+				expect(err.name).to.equal(fetchRes.InvalidJsonError.name);
 			});
 	});
 
