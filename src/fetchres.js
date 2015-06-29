@@ -31,6 +31,7 @@ export class BadServerResponseError extends Error {
 	// es6 smells
 	// https://twitter.com/andrewsmatt/status/554792707139584001
 	constructor(options) {
+		super();
 		this.message = options;
 		this.name = 'BadServerResponseError';
 	}
@@ -38,6 +39,7 @@ export class BadServerResponseError extends Error {
 
 export class InvalidJsonError extends Error {
 	constructor(options) {
+		super();
 		this.message = options;
 		this.name = 'InvalidJsonError';
 	}
@@ -45,6 +47,7 @@ export class InvalidJsonError extends Error {
 
 export class ReadTimeoutError extends Error {
 	constructor(options) {
+		super();
 		this.message = options;
 		this.name = 'ReadTimeoutError';
 	}
