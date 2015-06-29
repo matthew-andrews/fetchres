@@ -31,21 +31,24 @@ export class BadServerResponseError extends Error {
 	// es6 smells
 	// https://twitter.com/andrewsmatt/status/554792707139584001
 	constructor(options) {
-		super(options);
+		super();
+		this.message = options;
 		this.name = 'BadServerResponseError';
 	}
 }
 
 export class InvalidJsonError extends Error {
 	constructor(options) {
-		super(options);
+		super();
+		this.message = options;
 		this.name = 'InvalidJsonError';
 	}
 }
 
 export class ReadTimeoutError extends Error {
 	constructor(options) {
-		super(options);
+		super();
+		this.message = options;
 		this.name = 'ReadTimeoutError';
 	}
 }
