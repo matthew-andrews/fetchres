@@ -73,7 +73,8 @@ describe('fetch', function() {
 			.then(fetchRes.json)
 			.catch(function(err) {
 				expect(err.name).to.equal(fetchRes.InvalidJsonError.name);
-				expect(fetchRes.originatedError(err)).to.be.true;
+				var isFetchResOriginatedError = fetchRes.originatedError(err);
+				expect(isFetchResOriginatedError).to.equal(true);
 			});
 	});
 
