@@ -56,7 +56,7 @@ export class ReadTimeoutError extends Error {
 export function originatedError(err) {
 	if (err.name === BadServerResponseError.name
 		|| err.name === InvalidJsonError.name
-		|| err.name === ReadTimeoutError.anem) {
+		|| err.name === ReadTimeoutError.name) {
 		return true;
 	} else {
 		return false;
