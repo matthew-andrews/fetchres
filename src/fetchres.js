@@ -9,7 +9,7 @@ export function json(response) {
 	}
 	return response.json()
 		.catch(function(err) {
-			if (err.message.indexOf('timeout') === 0) {
+			if (err.message.indexOf('timeout') > -1) {
 				throw new ReadTimeoutError(err.message);
 			}
 			// probably invalid json
@@ -50,5 +50,15 @@ export class ReadTimeoutError extends Error {
 		super();
 		this.message = options;
 		this.name = 'ReadTimeoutError';
+	}
+}
+
+export function originatedError(err) {
+	if (err.name === BadServerResponseError.name
+		|| err.name === InvalidJsonError.name
+		|| err.name === ReadTimeoutError.anem) {
+		return true;
+	} else {
+		return false;
 	}
 }
