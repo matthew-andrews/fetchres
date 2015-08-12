@@ -9,7 +9,7 @@ export function json(response) {
 	}
 	return response.json()
 		.catch(function(err) {
-			if (err.message.indexOf('response timeout at') === 0) {
+			if (err.message.indexOf('timeout') === 0) {
 				throw new ReadTimeoutError(err.message);
 			}
 			// probably invalid json
