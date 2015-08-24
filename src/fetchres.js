@@ -7,6 +7,11 @@ export function json(response) {
 	if (!response.ok) {
 		throw new BadServerResponseError(response.status);
 	}
+
+	if (response.status === 204) {
+		return undefined;
+	}
+
 	return response.json()
 		.catch(function(err) {
 			if (err.message.indexOf('timeout') > -1) {
@@ -21,9 +26,15 @@ export function text(response) {
 	if (Array.isArray(response)) {
 		return Promise.all(response.map(text));
 	}
+
 	if (!response.ok) {
 		throw new BadServerResponseError(response.status);
 	}
+
+	if (response.status === 204) {
+		return undefined;
+	}
+
 	return response.text();
 }
 
