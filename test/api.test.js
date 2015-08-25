@@ -23,6 +23,9 @@ describe('fetch', function() {
 			.get('/fail.txt')
 			.reply(410, bad);
 		nock('https://mattandre.ws')
+			.get('/no.txt')
+			.reply(204, '');
+		nock('https://mattandre.ws')
 			.get('/succeed.json')
 			.times(3)
 			.reply(200, { text: good });
@@ -32,6 +35,9 @@ describe('fetch', function() {
 		nock('https://mattandre.ws')
 			.get('/invalid.json')
 			.reply(200, 'that\'s no json');
+		nock('https://mattandre.ws')
+			.get('/no.json')
+			.reply(204, '');
 	});
 
 	it('should facilitate the making of requests', function() {
@@ -78,6 +84,14 @@ describe('fetch', function() {
 			});
 	});
 
+	it('should do the right thing with contentless json responses', function() {
+		return fetch('https://mattandre.ws/no.json')
+			.then(fetchRes.json)
+			.then(function(json) {
+				expect(json).to.equal(undefined);
+			});
+	});
+
 	it('should facilitate the making of many json requests', function() {
 		return Promise.all([
 				fetch('https://mattandre.ws/succeed.json'),
@@ -99,6 +113,14 @@ describe('fetch', function() {
 			.then(function(data) {
 				expect(data[0]).to.equal(good);
 				expect(data[1]).to.equal(good);
+			});
+	});
+
+	it('should do the right thing with contentless text responses', function() {
+		return fetch('https://mattandre.ws/no.txt')
+			.then(fetchRes.text)
+			.then(function(txt) {
+				expect(txt).to.equal(undefined);
 			});
 	});
 
