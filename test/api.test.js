@@ -15,27 +15,27 @@ var bad = 'good bye cruel world. 再见残酷的世界。';
 describe('fetch', function() {
 
 	before(function() {
-		nock('https://mattandre.ws')
+		nock('http://wheresrhys.co.uk')
 			.get('/succeed.txt')
 			.times(3)
 			.reply(200, good);
-		nock('https://mattandre.ws')
+		nock('http://wheresrhys.co.uk')
 			.get('/fail.txt')
 			.reply(410, bad);
-		nock('https://mattandre.ws')
+		nock('http://wheresrhys.co.uk')
 			.get('/succeed.json')
 			.times(3)
 			.reply(200, { text: good });
-		nock('https://mattandre.ws')
+		nock('http://wheresrhys.co.uk')
 			.get('/fail.json')
 			.reply(404, { text: bad });
-		nock('https://mattandre.ws')
+		nock('http://wheresrhys.co.uk')
 			.get('/invalid.json')
 			.reply(200, 'that\'s no json');
 	});
 
 	it('should facilitate the making of requests', function() {
-		return fetch('https://mattandre.ws/succeed.txt')
+		return fetch('http://wheresrhys.co.uk/succeed.txt')
 			.then(fetchRes.text)
 			.then(function(data) {
 				expect(data).to.equal(good);
@@ -43,7 +43,7 @@ describe('fetch', function() {
 	});
 
 	it('should do the right thing with bad requests', function() {
-		return fetch('https://mattandre.ws/fail.txt')
+		return fetch('http://wheresrhys.co.uk/fail.txt')
 			.then(fetchRes.text)
 			.catch(function(err) {
 				expect(err.name).to.equal(fetchRes.BadServerResponseError.name);
@@ -52,7 +52,7 @@ describe('fetch', function() {
 	});
 
 	it('should facilitate the making of json requests', function() {
-		return fetch('https://mattandre.ws/succeed.json')
+		return fetch('http://wheresrhys.co.uk/succeed.json')
 			.then(fetchRes.json)
 			.then(function(data) {
 				expect(data.text).to.equal(good);
@@ -60,7 +60,7 @@ describe('fetch', function() {
 	});
 
 	it('should do the right thing with bad json requests', function() {
-		return fetch('https://mattandre.ws/fail.json')
+		return fetch('http://wheresrhys.co.uk/fail.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
 				expect(err.name).to.equal(fetchRes.BadServerResponseError.name);
@@ -69,7 +69,7 @@ describe('fetch', function() {
 	});
 
 	it('should do the right thing with invalid json responses', function() {
-		return fetch('https://mattandre.ws/invalid.json')
+		return fetch('http://wheresrhys.co.uk/invalid.json')
 			.then(fetchRes.json)
 			.catch(function(err) {
 				expect(err.name).to.equal(fetchRes.InvalidJsonError.name);
@@ -80,8 +80,8 @@ describe('fetch', function() {
 
 	it('should facilitate the making of many json requests', function() {
 		return Promise.all([
-				fetch('https://mattandre.ws/succeed.json'),
-				fetch('https://mattandre.ws/succeed.json')
+				fetch('http://wheresrhys.co.uk/succeed.json'),
+				fetch('http://wheresrhys.co.uk/succeed.json')
 			])
 			.then(fetchRes.json)
 			.then(function(data) {
@@ -92,8 +92,8 @@ describe('fetch', function() {
 
 	it('should facilitate the making of many txt requests', function() {
 		return Promise.all([
-				fetch('https://mattandre.ws/succeed.txt'),
-				fetch('https://mattandre.ws/succeed.txt')
+				fetch('http://wheresrhys.co.uk/succeed.txt'),
+				fetch('http://wheresrhys.co.uk/succeed.txt')
 			])
 			.then(fetchRes.text)
 			.then(function(data) {
