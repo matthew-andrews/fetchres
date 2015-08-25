@@ -1,6 +1,6 @@
 {
   "name": "fetchres",
-  "version": "1.4.1",
+  "version": "0.0.0",
   "main": "lib/fetchres.js",
   "scripts": {
     "clean": "git clean -fxd",
