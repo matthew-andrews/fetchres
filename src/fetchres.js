@@ -5,7 +5,7 @@ export function json(response) {
 		return Promise.all(response.map(json));
 	}
 	if (!response.ok) {
-		throw new BadServerResponseError(response.status);
+		throw new BadServerResponseError(response.url, response.status, response.statusText);
 	}
 
 	if (response.status === 204) {
@@ -28,7 +28,7 @@ export function text(response) {
 	}
 
 	if (!response.ok) {
-		throw new BadServerResponseError(response.status);
+		throw new BadServerResponseError(response.url, response.status, response.statusText);
 	}
 
 	if (response.status === 204) {
@@ -41,9 +41,9 @@ export function text(response) {
 export class BadServerResponseError extends Error {
 	// es6 smells
 	// https://twitter.com/andrewsmatt/status/554792707139584001
-	constructor(options) {
+	constructor(url, status, statusText) {
 		super();
-		this.message = options;
+		this.message = `${url} responded with a ${status} (${statusText})`;
 		this.name = 'BadServerResponseError';
 	}
 }

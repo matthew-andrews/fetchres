@@ -53,7 +53,7 @@ describe('fetch', function() {
 			.then(fetchRes.text)
 			.catch(function(err) {
 				expect(err.name).to.equal(fetchRes.BadServerResponseError.name);
-				expect(err.message).to.equal(410);
+				expect(err.message).to.equal('https://mattandre.ws/fail.txt responded with a 410 (Gone)');
 			});
 	});
 
@@ -70,7 +70,7 @@ describe('fetch', function() {
 			.then(fetchRes.json)
 			.catch(function(err) {
 				expect(err.name).to.equal(fetchRes.BadServerResponseError.name);
-				expect(err.message).to.equal(404);
+				expect(err.message).to.equal('https://mattandre.ws/fail.json responded with a 404 (Not Found)');
 			});
 	});
 
