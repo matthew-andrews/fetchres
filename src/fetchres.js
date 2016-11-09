@@ -1,17 +1,14 @@
 "use strict";
-const BlackHoleStream = require('black-hole-stream');
 
 export function json(response) {
 	if (Array.isArray(response)) {
 		return Promise.all(response.map(json));
 	}
 	if (!response.ok) {
-		response.body.pipe(new BlackHoleStream());
 		throw new BadServerResponseError(response.url, response.status, response.statusText);
 	}
 
 	if (response.status === 204) {
-		response.body.pipe(new BlackHoleStream());
 		return undefined;
 	}
 
@@ -31,12 +28,10 @@ export function text(response) {
 	}
 
 	if (!response.ok) {
-		response.body.pipe(new BlackHoleStream());
 		throw new BadServerResponseError(response.url, response.status, response.statusText);
 	}
 
 	if (response.status === 204) {
-		response.body.pipe(new BlackHoleStream());
 		return undefined;
 	}
 
