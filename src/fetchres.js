@@ -5,10 +5,12 @@ export function json(response) {
 		return Promise.all(response.map(json));
 	}
 	if (!response.ok) {
+		response.text();
 		throw new BadServerResponseError(response.url, response.status, response.statusText);
 	}
 
 	if (response.status === 204) {
+		response.text();
 		return undefined;
 	}
 
@@ -28,10 +30,12 @@ export function text(response) {
 	}
 
 	if (!response.ok) {
+		response.text();
 		throw new BadServerResponseError(response.url, response.status, response.statusText);
 	}
 
 	if (response.status === 204) {
+		response.text();
 		return undefined;
 	}
 
